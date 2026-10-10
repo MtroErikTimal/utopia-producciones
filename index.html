@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100d16">
+  <meta name="description" content="UTOPIA PRODUCCIONES: DJ, audio e iluminación para bodas, XV años y eventos sociales. Conoce nuestros paquetes y solicita una cotización.">
+  <title>UTOPIA PRODUCCIONES | DJ, audio e iluminación</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #100d16;
+      --surface: #191521;
+      --surface-light: #211b2c;
+      --text: #f7f2ff;
+      --muted: #b5acbf;
+      --pink: #f471b5;
+      --violet: #ad8aff;
+      --gold: #ffd28a;
+      --line: rgba(255, 255, 255, .12);
+      --radius: 22px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+    button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+    .container { width: min(1160px, calc(100% - 40px)); margin-inline: auto; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--gold);
+      font-size: .76rem;
+      font-weight: 750;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { width: 20px; height: 1px; background: currentColor; content: ""; }
+    .button {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 20px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      background: linear-gradient(110deg, var(--pink), var(--violet));
+      color: #1b1021;
+      font-size: .92rem;
+      font-weight: 750;
+      transition: transform .2s ease, filter .2s ease;
+      cursor: pointer;
+    }
+    .button:hover { filter: brightness(1.09); transform: translateY(-2px); }
+    .button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 3px;
+    }
+    .button.secondary { border-color: var(--line); background: rgba(255,255,255,.04); color: var(--text); }
+
+    header {
+      position: absolute;
+      z-index: 2;
+      top: 0;
+      right: 0;
+      left: 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav { display: flex; min-height: 78px; align-items: center; justify-content: space-between; gap: 24px; }
+    .brand { display: flex; align-items: center; }
+    .brand-logo { display: block; width: 74px; height: 74px; object-fit: contain; }
+    .nav-links { display: flex; align-items: center; gap: 29px; color: #d0c9d7; font-size: .88rem; }
+    .nav-links a:not(.button):hover { color: var(--pink); }
+    .nav-links .button { min-height: 42px; padding-inline: 17px; font-size: .84rem; }
+
+    .hero {
+      position: relative;
+      display: flex;
+      min-height: 730px;
+      align-items: center;
+      overflow: hidden;
+      padding: 130px 0 92px;
+      background:
+        radial-gradient(ellipse at 77% 38%, rgba(170,104,255,.19), transparent 31%),
+        radial-gradient(ellipse at 72% 68%, rgba(244,74,157,.15), transparent 30%),
+        linear-gradient(112deg, #100d16 33%, #171121 72%, #110e18);
+    }
+    .hero::before {
+      position: absolute;
+      top: 10%;
+      right: -9%;
+      width: min(720px, 65vw);
+      aspect-ratio: 1;
+      border: 1px solid rgba(200,160,255,.11);
+      border-radius: 50%;
+      box-shadow: 0 0 0 48px rgba(200,160,255,.025), 0 0 0 102px rgba(200,160,255,.02);
+      content: "";
+    }
+    .hero-grid { position: relative; display: grid; grid-template-columns: 1.04fr .96fr; align-items: center; gap: 28px; }
+    .hero-copy { max-width: 600px; }
+    .hero h1 { margin: 21px 0 18px; font-size: clamp(3.15rem, 7vw, 5.65rem); font-weight: 850; letter-spacing: -.075em; line-height: .98; }
+    .hero h1 span { display: block; color: var(--pink); }
+    .hero-copy > p { max-width: 520px; margin: 0; color: #c4bbc9; font-size: 1.06rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 29px; }
+    .hero-note { display: flex; align-items: center; gap: 9px; margin-top: 28px; color: var(--muted); font-size: .81rem; }
+    .hero-note svg { flex: 0 0 auto; color: var(--gold); }
+
+    .stage {
+      position: relative;
+      display: grid;
+      min-height: 460px;
+      place-items: center;
+      isolation: isolate;
+    }
+    .stage-glow {
+      position: absolute;
+      z-index: -1;
+      width: min(390px, 75%);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(244,113,181,.22), rgba(170,138,255,.12) 42%, transparent 70%);
+      filter: blur(8px);
+    }
+    .beam { position: absolute; top: 3%; left: 52%; width: 2px; height: 245px; transform-origin: top; background: linear-gradient(var(--gold), transparent); opacity: .48; }
+    .beam.one { transform: rotate(-28deg); }
+    .beam.two { transform: rotate(28deg); }
+    .disc {
+      position: relative;
+      display: grid;
+      width: min(310px, 65vw);
+      aspect-ratio: 1;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 50%;
+      background: repeating-radial-gradient(circle, #211b2c 0 2px, #181420 3px 5px, #261c2c 6px 7px);
+      box-shadow: 0 24px 95px rgba(0,0,0,.43), 0 0 80px rgba(244,113,181,.1);
+      animation: spin 28s linear infinite;
+    }
+    .disc::before, .disc::after { position: absolute; border: 1px solid rgba(255,255,255,.08); border-radius: 50%; content: ""; }
+    .disc::before { inset: 19%; }
+    .disc::after { inset: 31%; }
+    .disc-center {
+      display: grid;
+      width: 27%;
+      aspect-ratio: 1;
+      place-items: center;
+      border: 5px solid #33253c;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), var(--violet));
+      color: #211323;
+      font-size: 1.25rem;
+      font-weight: 900;
+    }
+    .sound-bars { position: absolute; bottom: 16%; left: 4%; display: flex; height: 45px; align-items: center; gap: 5px; }
+    .sound-bars i { width: 3px; height: var(--h); border-radius: 4px; background: linear-gradient(var(--pink), var(--violet)); opacity: .86; }
+    .stage-tag {
+      position: absolute;
+      right: 0;
+      bottom: 11%;
+      padding: 13px 17px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: rgba(25,21,33,.87);
+      box-shadow: 0 15px 40px rgba(0,0,0,.2);
+      backdrop-filter: blur(10px);
+      font-size: .82rem;
+    }
+    .stage-tag strong { display: block; color: var(--gold); font-size: .96rem; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .trust-strip { border-block: 1px solid var(--line); background: #15111c; }
+    .trust-items { display: grid; grid-template-columns: repeat(3,1fr); padding: 22px 0; }
+    .trust-item { display: flex; align-items: center; justify-content: center; gap: 11px; color: #d5cedc; font-size: .89rem; }
+    .trust-item + .trust-item { border-left: 1px solid var(--line); }
+    .trust-item span { color: var(--gold); font-size: 1.1rem; }
+
+    section { padding: 100px 0; }
+    .section-heading { max-width: 660px; margin: 0 auto 44px; text-align: center; }
+    .section-heading .eyebrow { justify-content: center; }
+    .section-heading h2 { margin: 13px 0 12px; font-size: clamp(2rem, 4.6vw, 3.15rem); letter-spacing: -.055em; line-height: 1.08; }
+    .section-heading p { margin: 0; color: var(--muted); }
+    .services-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+    .service-card { min-height: 210px; padding: 25px 22px; border: 1px solid var(--line); border-radius: var(--radius); background: linear-gradient(145deg, #1b1723, #15121c); }
+    .service-icon { display: grid; width: 45px; height: 45px; place-items: center; border: 1px solid rgba(244,113,181,.22); border-radius: 14px; background: rgba(244,113,181,.09); color: var(--pink); }
+    .service-card h3 { margin: 21px 0 7px; font-size: 1.06rem; }
+    .service-card p { margin: 0; color: var(--muted); font-size: .88rem; }
+
+    .catalog { background: linear-gradient(180deg, #15111c, #100d16); }
+    .catalog-note { margin: -23px auto 34px; color: #a89eaf; font-size: .81rem; text-align: center; }
+    .packages { display: grid; grid-template-columns: repeat(4,1fr); align-items: stretch; gap: 15px; }
+    .package {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 26px 21px 21px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(160deg, #1c1825, #15121c 78%);
+    }
+    .package.featured { border-color: rgba(244,113,181,.67); background: linear-gradient(160deg, rgba(119,67,126,.37), #1b1624 78%); box-shadow: 0 18px 50px rgba(177,79,151,.1); }
+    .popular { position: absolute; top: -12px; right: 17px; padding: 4px 10px; border-radius: 999px; background: var(--pink); color: #211323; font-size: .68rem; font-weight: 850; letter-spacing: .04em; text-transform: uppercase; }
+    .package h3 { margin: 0; font-size: 1.17rem; }
+    .package-subtitle { min-height: 43px; margin: 5px 0 14px; color: var(--muted); font-size: .8rem; }
+    .price { padding-bottom: 17px; border-bottom: 1px solid var(--line); font-size: 2.05rem; font-weight: 850; letter-spacing: -.06em; }
+    .price small { display: block; margin-top: -2px; color: var(--muted); font-size: .7rem; font-weight: 500; letter-spacing: 0; }
+    .package ul { display: grid; gap: 11px; margin: 18px 0 22px; padding: 0; list-style: none; color: #d2cbd8; font-size: .82rem; }
+    .package li { display: flex; gap: 9px; }
+    .package li::before { color: var(--pink); content: "✓"; font-weight: 900; }
+    .package .button { width: 100%; min-height: 43px; margin-top: auto; font-size: .84rem; }
+    .custom-note { margin: 25px 0 0; color: var(--muted); font-size: .87rem; text-align: center; }
+    .custom-note a { color: var(--pink); font-weight: 700; }
+
+    .process-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; }
+    .process-step { padding: 23px 22px; border-left: 1px solid rgba(244,113,181,.5); }
+    .process-step span { color: var(--pink); font-size: .76rem; font-weight: 800; letter-spacing: .15em; }
+    .process-step h3 { margin: 8px 0 6px; font-size: 1.1rem; }
+    .process-step p { margin: 0; color: var(--muted); font-size: .89rem; }
+
+    .contact { padding-top: 5px; }
+    .contact-box {
+      display: grid;
+      grid-template-columns: .86fr 1.14fr;
+      gap: 46px;
+      padding: clamp(26px, 5vw, 54px);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: radial-gradient(ellipse at 0 0, rgba(244,113,181,.12), transparent 55%), #191521;
+    }
+    .contact-copy h2 { margin: 14px 0 13px; font-size: clamp(2rem, 4vw, 2.85rem); letter-spacing: -.06em; line-height: 1.04; }
+    .contact-copy p { margin: 0; color: var(--muted); }
+    .contact-highlight { display: inline-block; margin-top: 25px; color: var(--gold); font-size: .86rem; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .field { display: grid; gap: 6px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { color: #ded7e5; font-size: .78rem; font-weight: 650; }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      min-height: 45px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 11px;
+      background: #100d16;
+      color: var(--text);
+    }
+    .field textarea { min-height: 85px; resize: vertical; }
+    .form-submit { grid-column: 1 / -1; justify-self: start; }
+    .form-result { grid-column: 1 / -1; margin: 0; color: var(--gold); font-size: .83rem; }
+    .form-result:empty { display: none; }
+    footer { padding: 26px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .78rem; }
+    .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
+    .footer-inner strong { color: var(--text); letter-spacing: .06em; }
+
+    @media (max-width: 900px) {
+      .hero { min-height: auto; }
+      .hero-grid { grid-template-columns: 1fr .78fr; }
+      .stage { min-height: 350px; }
+      .disc { width: min(270px, 60vw); }
+      .services-grid, .packages { grid-template-columns: repeat(2,1fr); }
+      .contact-box { gap: 28px; }
+    }
+    @media (max-width: 640px) {
+      .container { width: min(100% - 32px, 520px); }
+      .nav { min-height: 69px; }
+      .nav-links { gap: 14px; }
+      .nav-links a:not(.button) { display: none; }
+      .nav-links .button { min-height: 40px; padding-inline: 14px; }
+      .hero { padding: 120px 0 54px; }
+      .hero-grid { grid-template-columns: 1fr; gap: 0; }
+      .hero h1 { font-size: clamp(3.25rem, 15vw, 5rem); }
+      .hero-copy > p { font-size: .98rem; }
+      .stage { min-height: 300px; margin-top: 7px; }
+      .disc { width: 230px; }
+      .beam { height: 160px; }
+      .stage-tag { right: 1%; bottom: 5%; }
+      .trust-items { grid-template-columns: 1fr; gap: 13px; padding: 19px 0; }
+      .trust-item + .trust-item { border: 0; }
+      section { padding: 72px 0; }
+      .section-heading { margin-bottom: 32px; }
+      .services-grid, .packages { grid-template-columns: 1fr; }
+      .service-card { min-height: 0; }
+      .package-subtitle { min-height: 0; }
+      .process-grid { grid-template-columns: 1fr; gap: 12px; }
+      .contact-box { grid-template-columns: 1fr; gap: 27px; padding: 25px 20px; }
+      .form-grid { grid-template-columns: 1fr; }
+      .field.full, .form-submit, .form-result { grid-column: auto; }
+      .form-submit { width: 100%; }
+      .footer-inner { justify-content: center; text-align: center; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav container" aria-label="Navegación principal">
+      <a class="brand" href="#inicio" aria-label="UTOPIA PRODUCCIONES, inicio">
+        <img class="brand-logo" src="utopia-logo.jpg" alt="UTOPIA Producciones — vive la experiencia">
+      </a>
+      <div class="nav-links">
+        <a href="#servicios">Servicios</a>
+        <a href="#paquetes">Paquetes</a>
+        <a class="button" href="#contacto">Cotizar evento <span aria-hidden="true">↗</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">DJ · Audio · Iluminación</span>
+          <h1>Tu evento.<span>En otra</span> dimensión.</h1>
+          <p>En UTOPIA PRODUCCIONES convertimos tus momentos especiales en experiencias que se sienten, se escuchan y se recuerdan.</p>
+          <div class="hero-actions">
+            <a class="button" href="#paquetes">Explorar paquetes <span aria-hidden="true">↓</span></a>
+            <a class="button secondary" href="#contacto">Cuéntanos tu idea</a>
+          </div>
+          <div class="hero-note">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Bodas, XV años, cumpleaños y eventos especiales
+          </div>
+        </div>
+        <div class="stage" aria-label="Ilustración de un disco y luces de escenario">
+          <div class="stage-glow"></div>
+          <div class="beam one"></div><div class="beam two"></div>
+          <div class="disc"><div class="disc-center">U</div></div>
+          <div class="sound-bars" aria-hidden="true">
+            <i style="--h:14px"></i><i style="--h:27px"></i><i style="--h:19px"></i><i style="--h:39px"></i><i style="--h:24px"></i><i style="--h:44px"></i><i style="--h:22px"></i><i style="--h:34px"></i><i style="--h:16px"></i><i style="--h:29px"></i><i style="--h:19px"></i><i style="--h:37px"></i><i style="--h:13px"></i>
+          </div>
+          <div class="stage-tag"><strong>La noche es tuya</strong>Nosotros ponemos el ambiente</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="trust-strip">
+      <div class="container trust-items">
+        <div class="trust-item"><span aria-hidden="true">✦</span> Equipo profesional</div>
+        <div class="trust-item"><span aria-hidden="true">♫</span> Música para cada momento</div>
+        <div class="trust-item"><span aria-hidden="true">✧</span> Producción a tu medida</div>
+      </div>
+    </div>
+
+    <section id="servicios">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Lo hacemos posible</span>
+          <h2>Todo para que tu evento brille</h2>
+          <p>Nos encargamos de los detalles técnicos para que tú disfrutes cada instante.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">♫</div>
+            <h3>DJ y música</h3>
+            <p>Mezclas en vivo, repertorio personalizado y música para todas las generaciones.</p>
+          </article>
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">◉</div>
+            <h3>Audio profesional</h3>
+            <p>Sonido nítido para la pista, los brindis, las presentaciones y cada anuncio.</p>
+          </article>
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">✧</div>
+            <h3>Iluminación</h3>
+            <p>Luces dinámicas y ambiente a color para transformar cualquier espacio.</p>
+          </article>
+          <article class="service-card">
+            <div class="service-icon" aria-hidden="true">▤</div>
+            <h3>Producción especial</h3>
+            <p>Complementos y montaje coordinados con el estilo y las necesidades de tu evento.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="catalog" id="paquetes">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Catálogo de experiencias</span>
+          <h2>Elige tu paquete ideal</h2>
+          <p>Una gran fiesta empieza con el ambiente perfecto. Encuentra el nivel de producción para tu celebración.</p>
+        </div>
+        <p class="catalog-note">Precios de referencia en pesos mexicanos (MXN). Paquetes por hasta 5 horas de servicio.</p>
+        <div class="packages">
+          <article class="package">
+            <h3>Esencial</h3>
+            <p class="package-subtitle">Una fiesta íntima, llena de energía.</p>
+            <div class="price">$4,500<small>MXN · desde</small></div>
+            <ul>
+              <li>DJ y selección musical</li>
+              <li>Sistema de audio para hasta 80 personas</li>
+              <li>Iluminación ambiental básica</li>
+              <li>Montaje y desmontaje</li>
+            </ul>
+            <a class="button secondary" href="#contacto" data-package="Esencial">Cotizar paquete</a>
+          </article>
+          <article class="package">
+            <h3>Fiesta</h3>
+            <p class="package-subtitle">Más luz y sonido para celebrar en grande.</p>
+            <div class="price">$7,900<small>MXN · desde</small></div>
+            <ul>
+              <li>Todo lo del paquete Esencial</li>
+              <li>Audio para hasta 150 personas</li>
+              <li>Iluminación dinámica para pista</li>
+              <li>Micrófono inalámbrico</li>
+            </ul>
+            <a class="button secondary" href="#contacto" data-package="Fiesta">Cotizar paquete</a>
+          </article>
+          <article class="package featured">
+            <span class="popular">Favorito</span>
+            <h3>Utopía</h3>
+            <p class="package-subtitle">Una experiencia envolvente para tu gran día.</p>
+            <div class="price">$12,900<small>MXN · desde</small></div>
+            <ul>
+              <li>Todo lo del paquete Fiesta</li>
+              <li>Audio para hasta 250 personas</li>
+              <li>Iluminación premium para pista</li>
+              <li>Ambientación de momentos especiales</li>
+            </ul>
+            <a class="button" href="#contacto" data-package="Utopía">Cotizar paquete</a>
+          </article>
+          <article class="package">
+            <h3>Gran Producción</h3>
+            <p class="package-subtitle">Un montaje espectacular y hecho a tu medida.</p>
+            <div class="price">$19,900<small>MXN · desde</small></div>
+            <ul>
+              <li>Producción personalizada</li>
+              <li>Audio e iluminación ampliados</li>
+              <li>Coordinación técnica del montaje</li>
+              <li>Ideal para eventos de gran formato</li>
+            </ul>
+            <a class="button secondary" href="#contacto" data-package="Gran Producción">Cotizar paquete</a>
+          </article>
+        </div>
+        <p class="custom-note">¿Tienes otra idea en mente? <a href="#contacto">Armamos una propuesta a tu medida.</a></p>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Sencillo y personalizado</span>
+          <h2>De tu idea a una noche inolvidable</h2>
+        </div>
+        <div class="process-grid">
+          <article class="process-step"><span>01 · NOS CUENTAS</span><h3>¿Qué vamos a celebrar?</h3><p>Compártenos la fecha, el lugar y cómo imaginas tu evento.</p></article>
+          <article class="process-step"><span>02 · LO DISEÑAMOS</span><h3>Preparamos tu propuesta</h3><p>Recomendamos el paquete y el equipo que mejor se ajustan a ti.</p></article>
+          <article class="process-step"><span>03 · LO DISFRUTAS</span><h3>Nosotros ponemos el ambiente</h3><p>Coordinamos el montaje para que tú solo te ocupes de celebrar.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contacto">
+      <div class="container contact-box">
+        <div class="contact-copy">
+          <span class="eyebrow">Empecemos a planear</span>
+          <h2>Cuéntanos cómo será tu noche.</h2>
+          <p>Déjanos los detalles de tu evento y prepara una solicitud de cotización personalizada.</p>
+          <span class="contact-highlight">Bodas · XV años · Graduaciones · Eventos sociales</span>
+        </div>
+        <form id="quote-form" class="form-grid">
+          <div class="field">
+            <label for="name">Tu nombre</label>
+            <input id="name" name="name" autocomplete="name" required placeholder="¿Cómo te llamas?">
+          </div>
+          <div class="field">
+            <label for="event">Tipo de evento</label>
+            <select id="event" name="event" required>
+              <option value="" disabled selected>Elige una opción</option>
+              <option>Boda</option><option>XV años</option><option>Cumpleaños</option><option>Graduación</option><option>Evento corporativo</option><option>Otro evento</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="date">Fecha del evento</label>
+            <input id="date" name="date" type="date" required>
+          </div>
+          <div class="field">
+            <label for="package">Paquete de interés</label>
+            <select id="package" name="package">
+              <option value="">Todavía no lo sé</option>
+              <option>Esencial</option><option>Fiesta</option><option>Utopía</option><option>Gran Producción</option><option>Propuesta personalizada</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="location">Ciudad o lugar del evento</label>
+            <input id="location" name="location" autocomplete="address-level2" required placeholder="Ciudad, salón o espacio">
+          </div>
+          <div class="field full">
+            <label for="details">Cuéntanos un poco más (opcional)</label>
+            <textarea id="details" name="details" placeholder="Número aproximado de invitados, estilo que buscas..."></textarea>
+          </div>
+          <button class="button form-submit" type="submit">Preparar mi solicitud <span aria-hidden="true">↗</span></button>
+          <p class="form-result" id="form-result" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <span><strong>UTOPIA PRODUCCIONES</strong> · DJ, audio e iluminación</span>
+      <span>Precios sujetos a ubicación, fecha y disponibilidad. Solicita una cotización final.</span>
+    </div>
+  </footer>
+  <script>
+    const packageSelect = document.querySelector("#package");
+    const result = document.querySelector("#form-result");
+    const form = document.querySelector("#quote-form");
+
+    document.querySelectorAll("[data-package]").forEach((link) => {
+      link.addEventListener("click", () => {
+        packageSelect.value = link.dataset.package;
+      });
+    });
+
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const values = new FormData(form);
+      const lines = [
+        `Hola, soy ${values.get("name")}. Me gustaría cotizar un evento.`,
+        `Evento: ${values.get("event")}.`,
+        `Fecha: ${values.get("date")}.`,
+        `Lugar: ${values.get("location")}.`,
+        `Paquete: ${values.get("package") || "Por definir"}.`,
+        values.get("details") ? `Detalles: ${values.get("details")}` : ""
+      ].filter(Boolean);
+      const message = lines.join("\n");
+      result.textContent = `Solicitud lista. Copia este mensaje para enviarlo a UTOPIA PRODUCCIONES: ${message}`;
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(message).then(() => {
+          result.textContent = "¡Solicitud preparada y copiada! Envíala a UTOPIA PRODUCCIONES por tu canal de contacto preferido.";
+        }).catch(() => {
+          result.textContent = `No se pudo copiar automáticamente. Selecciona y copia esta solicitud: ${message}`;
+        });
+      }
+    });
+  </script>
+</body>
+</html>
