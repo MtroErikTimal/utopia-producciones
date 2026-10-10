@@ -865,6 +865,62 @@
       color: var(--pink);
     }
 
+    .music-player {
+      position: fixed;
+      z-index: 10;
+      right: 20px;
+      bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(25, 21, 33, .94);
+      box-shadow: 0 10px 35px rgba(0, 0, 0, .28);
+      backdrop-filter: blur(12px);
+    }
+
+    .music-player button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .music-player button:hover {
+      color: var(--gold);
+    }
+
+    .music-icon {
+      color: var(--gold);
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .music-status {
+      color: var(--muted);
+      font-size: .75rem;
+    }
+
+    @media (max-width: 640px) {
+      .music-player {
+        right: 12px;
+        bottom: 12px;
+        gap: 8px;
+        padding: 10px 13px;
+      }
+
+      .music-status {
+        display: none;
+      }
+    }
+
     @media (max-width: 900px) {
       .hero {
         min-height: auto;
@@ -1727,6 +1783,14 @@
     </section>
   </main>
 
+  <div class="music-player">
+    <button id="music-toggle" type="button" aria-pressed="false" aria-label="Reproducir música ambiental">
+      <span class="music-icon" aria-hidden="true">♫</span>
+      <span id="music-label">Reproducir música</span>
+    </button>
+    <span class="music-status" id="music-status" role="status" aria-live="polite">Música ambiental</span>
+  </div>
+
   <footer>
     <div class="container footer-inner">
       <span><strong>UTOPIA PRODUCCIONES</strong> · DJ, audio e iluminación</span>
@@ -1740,6 +1804,96 @@
     </div>
   </footer>
   <script>
+    const musicButton = document.querySelector("#music-toggle");
+    const musicLabel = document.querySelector("#music-label");
+    const musicStatus = document.querySelector("#music-status");
+    const musicChords = [
+      [48, 55, 60, 64],
+      [45, 52, 57, 60],
+      [41, 48, 53, 57],
+      [43, 50, 55, 59]
+    ];
+    const musicMelody = [72, null, 76, null, 79, null, 76, null, 74, null, 76, null, 72, null, 71, null];
+    const musicStepDuration = 60 / 76 / 2;
+    let musicContext;
+    let musicGain;
+    let musicTimer;
+    let musicNextStep = 0;
+    let musicStep = 0;
+
+    function playMusicTone(midiNote, startTime, duration, volume, waveform = "sine") {
+      const oscillator = musicContext.createOscillator();
+      const envelope = musicContext.createGain();
+      oscillator.type = waveform;
+      oscillator.frequency.value = 440 * 2 ** ((midiNote - 69) / 12);
+      envelope.gain.setValueAtTime(0.0001, startTime);
+      envelope.gain.exponentialRampToValueAtTime(volume, startTime + 0.08);
+      envelope.gain.setTargetAtTime(0.0001, startTime + duration * 0.65, duration * 0.22);
+      oscillator.connect(envelope);
+      envelope.connect(musicGain);
+      oscillator.start(startTime);
+      oscillator.stop(startTime + duration + 0.6);
+    }
+
+    function scheduleMusic() {
+      const scheduleUntil = musicContext.currentTime + 0.15;
+      while (musicNextStep < scheduleUntil) {
+        const stepInPhrase = musicStep % musicMelody.length;
+        if (stepInPhrase === 0) {
+          const chord = musicChords[Math.floor(musicStep / musicMelody.length) % musicChords.length];
+          chord.forEach((note) => playMusicTone(note, musicNextStep, musicStepDuration * 15, 0.012));
+        }
+
+        const melodyNote = musicMelody[stepInPhrase];
+        if (melodyNote !== null) {
+          playMusicTone(melodyNote, musicNextStep, musicStepDuration * 1.7, 0.045, "triangle");
+        }
+
+        musicNextStep += musicStepDuration;
+        musicStep += 1;
+      }
+    }
+
+    musicButton.addEventListener("click", async () => {
+      if (!window.AudioContext) {
+        musicStatus.textContent = "Tu navegador no admite reproducción de música.";
+        return;
+      }
+
+      try {
+        if (!musicContext) {
+          musicContext = new AudioContext();
+          musicGain = musicContext.createGain();
+          musicGain.gain.value = 0.55;
+          musicGain.connect(musicContext.destination);
+        }
+
+        if (musicContext.state === "running") {
+          clearInterval(musicTimer);
+          musicTimer = undefined;
+          await musicContext.suspend();
+          musicButton.setAttribute("aria-pressed", "false");
+          musicButton.setAttribute("aria-label", "Reanudar música ambiental");
+          musicLabel.textContent = "Reproducir música";
+          musicStatus.textContent = "Música pausada";
+          return;
+        }
+
+        await musicContext.resume();
+        musicNextStep = musicContext.currentTime + 0.05;
+        musicStep = 0;
+        scheduleMusic();
+        musicTimer = window.setInterval(scheduleMusic, 100);
+        musicButton.setAttribute("aria-pressed", "true");
+        musicButton.setAttribute("aria-label", "Pausar música ambiental");
+        musicLabel.textContent = "Pausar música";
+        musicStatus.textContent = "Música ambiental";
+      } catch (error) {
+        musicStatus.textContent = "No se pudo iniciar la música. Inténtalo de nuevo.";
+        console.error("No se pudo reproducir la música ambiental.", error);
+      }
+    });
+
     const packageSelect = document.querySelector("#package");
     const result = document.querySelector("#form-result");
     const form = document.querySelector("#quote-form");
