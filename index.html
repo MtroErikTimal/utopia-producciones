@@ -67,6 +67,11 @@
       outline-offset: 3px;
     }
     .button.secondary { border-color: var(--line); background: rgba(255,255,255,.04); color: var(--text); }
+    .button.whatsapp {
+      background: linear-gradient(110deg, #25d366, #1ebc5f);
+      color: #061b0d;
+      box-shadow: 0 10px 24px rgba(37, 211, 102, .22);
+    }
 
     header {
       position: absolute;
@@ -77,8 +82,11 @@
       border-bottom: 1px solid rgba(255,255,255,.08);
     }
     .nav { display: flex; min-height: 142px; align-items: center; justify-content: space-between; gap: 24px; }
-    .brand { display: flex; align-items: center; }
+    .brand { display: flex; align-items: center; gap: 14px; }
     .brand-logo { display: block; width: 146px; height: 146px; object-fit: contain; }
+    .brand-copy { display: flex; flex-direction: column; line-height: 1.1; }
+    .brand-name { font-size: 1rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    .brand-slogan { margin-top: 5px; color: var(--gold); font-size: .7rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
     .nav-links { display: flex; align-items: center; gap: 29px; color: #d0c9d7; font-size: .88rem; }
     .nav-links a:not(.button):hover { color: var(--pink); }
     .nav-links .button { min-height: 42px; padding-inline: 17px; font-size: .84rem; }
@@ -259,6 +267,9 @@
     footer { padding: 26px 0; border-top: 1px solid var(--line); color: var(--muted); font-size: .78rem; }
     .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
     .footer-inner strong { color: var(--text); letter-spacing: .06em; }
+    .social-links { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+    .social-links a { color: var(--gold); font-weight: 700; }
+    .social-links a:hover { color: var(--pink); }
 
     @media (max-width: 900px) {
       .hero { min-height: auto; }
@@ -306,6 +317,10 @@
     <nav class="nav container" aria-label="Navegación principal">
       <a class="brand" href="#inicio" aria-label="UTOPIA PRODUCCIONES, inicio">
         <img class="brand-logo" src="utopia-logo.jpg" alt="UTOPIA Producciones — vive la experiencia">
+        <div class="brand-copy" aria-hidden="true">
+          <span class="brand-name">UTOPIA</span>
+          <span class="brand-slogan">VIVE LA EXPERIENCIA</span>
+        </div>
       </a>
       <div class="nav-links">
         <a href="#servicios">Servicios</a>
@@ -324,7 +339,7 @@
           <p>En UTOPIA PRODUCCIONES convertimos tus momentos especiales en experiencias que se sienten, se escuchan y se recuerdan.</p>
           <div class="hero-actions">
             <a class="button" href="#paquetes">Explorar paquetes <span aria-hidden="true">↓</span></a>
-            <a class="button secondary" href="#contacto">Cuéntanos tu idea</a>
+            <a class="button whatsapp" href="https://wa.me/5212441196600?text=Hola%20UTOPIA%20PRODUCCIONES%2C%20quiero%20cotizar%20mi%20evento." target="_blank" rel="noopener">WhatsApp <span aria-hidden="true">↗</span></a>
           </div>
           <div class="hero-note">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -467,6 +482,9 @@
           <h2>Cuéntanos cómo será tu noche.</h2>
           <p>Déjanos los detalles de tu evento y prepara una solicitud de cotización personalizada.</p>
           <span class="contact-highlight">Bodas · XV años · Graduaciones · Eventos sociales</span>
+          <div class="hero-actions" style="margin-top: 24px; justify-content: flex-start;">
+            <a class="button whatsapp" href="https://wa.me/5212441196600?text=Hola%20UTOPIA%20PRODUCCIONES%2C%20me%20gustar%C3%ADa%20cotizar%20un%20evento." target="_blank" rel="noopener">Enviar por WhatsApp <span aria-hidden="true">↗</span></a>
+          </div>
         </div>
         <form id="quote-form" class="form-grid">
           <div class="field">
@@ -509,6 +527,10 @@
   <footer>
     <div class="container footer-inner">
       <span><strong>UTOPIA PRODUCCIONES</strong> · DJ, audio e iluminación</span>
+      <nav class="social-links" aria-label="Redes sociales">
+        <a href="https://www.facebook.com/share/1DYJjEXZh6/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">Facebook · Utopia Producciones <span aria-hidden="true">↗</span></a>
+        <a href="https://www.instagram.com/produccionesutopia?exln=MWFxOTNjandma3E4NQ==" target="_blank" rel="noopener noreferrer">Instagram · producciones utopia <span aria-hidden="true">↗</span></a>
+      </nav>
       <span>Precios sujetos a ubicación, fecha y disponibilidad. Solicita una cotización final.</span>
     </div>
   </footer>
@@ -516,6 +538,19 @@
     const packageSelect = document.querySelector("#package");
     const result = document.querySelector("#form-result");
     const form = document.querySelector("#quote-form");
+    const whatsappNumber = "5212441196600";
+
+    const buildMessage = (values) => {
+      const lines = [
+        `Hola, soy ${values.get("name")}. Me gustaría cotizar un evento.`,
+        `Evento: ${values.get("event")}.`,
+        `Fecha: ${values.get("date")}.`,
+        `Lugar: ${values.get("location")}.`,
+        `Paquete: ${values.get("package") || "Por definir"}.`,
+        values.get("details") ? `Detalles: ${values.get("details")}` : ""
+      ].filter(Boolean);
+      return lines.join("\n");
+    };
 
     document.querySelectorAll("[data-package]").forEach((link) => {
       link.addEventListener("click", () => {
@@ -526,21 +561,17 @@
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       const values = new FormData(form);
-      const lines = [
-        `Hola, soy ${values.get("name")}. Me gustaría cotizar un evento.`,
-        `Evento: ${values.get("event")}.`,
-        `Fecha: ${values.get("date")}.`,
-        `Lugar: ${values.get("location")}.`,
-        `Paquete: ${values.get("package") || "Por definir"}.`,
-        values.get("details") ? `Detalles: ${values.get("details")}` : ""
-      ].filter(Boolean);
-      const message = lines.join("\n");
-      result.textContent = `Solicitud lista. Copia este mensaje para enviarlo a UTOPIA PRODUCCIONES: ${message}`;
+      const message = buildMessage(values);
+      const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+      result.textContent = "Abriendo WhatsApp para enviar tu solicitud...";
+      window.open(whatsappUrl, "_blank", "noopener");
+
       if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(message).then(() => {
-          result.textContent = "¡Solicitud preparada y copiada! Envíala a UTOPIA PRODUCCIONES por tu canal de contacto preferido.";
+          result.textContent = "¡Solicitud preparada y lista para enviar por WhatsApp! También se copió al portapapeles.";
         }).catch(() => {
-          result.textContent = `No se pudo copiar automáticamente. Selecciona y copia esta solicitud: ${message}`;
+          result.textContent = "Se abrió WhatsApp con tu solicitud. Si no se abrió, copia este mensaje y envíalo manualmente: " + message;
         });
       }
     });
