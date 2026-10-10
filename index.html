@@ -613,6 +613,51 @@
       font-weight: 700;
     }
 
+    .complements {
+      background: #15111c;
+    }
+
+    .complements-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      align-items: stretch;
+      gap: 16px;
+    }
+
+    .complement-card {
+      padding: 24px 22px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: linear-gradient(145deg, #1c1825, #15121c);
+    }
+
+    .complement-card h3 {
+      margin: 0;
+      font-size: 1.08rem;
+    }
+
+    .complement-price {
+      margin: 7px 0 13px;
+      color: var(--gold);
+      font-size: 1.16rem;
+      font-weight: 800;
+    }
+
+    .complement-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .87rem;
+    }
+
+    .complement-card ul {
+      display: grid;
+      gap: 8px;
+      margin: 13px 0 0;
+      padding-left: 18px;
+      color: #d2cbd8;
+      font-size: .84rem;
+    }
+
     .process-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -783,7 +828,8 @@
       }
 
       .services-grid,
-      .packages {
+      .packages,
+      .complements-grid {
         grid-template-columns: repeat(2, 1fr);
       }
 
@@ -873,7 +919,8 @@
       }
 
       .services-grid,
-      .packages {
+      .packages,
+      .complements-grid {
         grid-template-columns: 1fr;
       }
 
@@ -943,6 +990,7 @@
       <div class="nav-links">
         <a href="#servicios">Servicios</a>
         <a href="#paquetes">Paquetes</a>
+        <a href="#complementos">Complementos</a>
         <a class="button" href="#contacto">Cotizar evento <span aria-hidden="true">↗</span></a>
       </div>
     </nav>
@@ -1134,6 +1182,119 @@
         </div>
         <p class="custom-note">¿Tienes otra idea en mente? <a href="#contacto">Armamos una propuesta a tu medida.</a>
         </p>
+      </div>
+    </section>
+
+    <section class="complements" id="complementos">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Personaliza tu celebración</span>
+          <h2>Complementos</h2>
+          <p>Agrega detalles, entretenimiento y experiencias para hacer tu evento todavía más especial.</p>
+        </div>
+        <div class="complements-grid">
+          <article class="complement-card">
+            <h3>Pantalla de gran formato</h3>
+            <div class="complement-price">$3,500</div>
+            <p>El tamaño de la pantalla depende del montaje.</p>
+          </article>
+          <article class="complement-card">
+            <h3>Pista iluminada</h3>
+            <div class="complement-price">$580 por módulo</div>
+            <ul>
+              <li>Cada módulo mide 1.22 m²</li>
+              <li>Renta mínima de 16 módulos</li>
+              <li>Materiales: cristal templado, aluminio e iluminación LED</li>
+            </ul>
+          </article>
+          <article class="complement-card">
+            <h3>Pista de charol</h3>
+            <div class="complement-price">$5,000</div>
+            <ul>
+              <li>Medidas: 5 × 3 m; renta mínima de 12 módulos</li>
+              <li>Madera de alta calidad y estructura metálica</li>
+              <li>Diseño prediseñado de acuerdo con la temática del evento</li>
+            </ul>
+          </article>
+          <article class="complement-card">
+            <h3>Máquina de confeti</h3>
+            <div class="complement-price">$4,600</div>
+            <p>Incluye 3 disparos. Materiales y formas disponibles: mariposas, corazones, pétalos de rosa, rectángulos metálicos y confeti artificial o de papel.</p>
+          </article>
+          <article class="complement-card">
+            <h3>Máquina de espuma</h3>
+            <div class="complement-price">$4,600</div>
+            <ul>
+              <li>Abarca 20 m³</li>
+              <li>Duración: 1 hora</li>
+            </ul>
+          </article>
+          <article class="complement-card">
+            <h3>Glitter Bar</h3>
+            <div class="complement-price">$3,000</div>
+            <p>Servicio de maquillaje de fantasía para decorar la piel de los invitados con purpurina, brillos y glitter de colores.</p>
+            <ul>
+              <li>2 horas de servicio y 1 maquilladora</li>
+              <li>Glitter de colores y pedrería de fantasía</li>
+              <li>Aro de luz LED, pintura neón, glitter tattoo y souvenirs</li>
+              <li>Maquilladora extra: $500</li>
+            </ul>
+          </article>
+          <article class="complement-card">
+            <h3>Pinta caritas</h3>
+            <div class="complement-price">$3,000</div>
+            <p>Diseños coloridos en el rostro de los niños para transformarlos en sus personajes favoritos, animales, superhéroes y más.</p>
+            <ul>
+              <li>2 horas de servicio y 1 maquilladora</li>
+              <li>Glitter de colores, pedrería de fantasía y maquillaje base agua</li>
+              <li>Extensiones de colores y glitter tattoo</li>
+              <li>Maquilladora extra: $500</li>
+            </ul>
+          </article>
+          <article class="complement-card">
+            <h3>Stand de tatuajes temporales</h3>
+            <div class="complement-price">Cotización personalizada</div>
+            <p>Haz único tu evento con tatuajes temporales para tus invitados.</p>
+            <ul>
+              <li>2 horas de servicio y 1 maquilladora</li>
+              <li>Tatuajes de diferentes tamaños, corporales y personalizados</li>
+              <li>Tatuajes neón</li>
+              <li>Maquilladora extra: $500</li>
+            </ul>
+          </article>
+          <article class="complement-card">
+            <h3>Mesa de dulces</h3>
+            <div class="complement-price">$3,300</div>
+            <p>Decoración personalizada y variedad de dulces, fruta, repostería, bombones, chocolates y más.</p>
+          </article>
+          <article class="complement-card">
+            <h3>Decoración con globos</h3>
+            <div class="complement-price">Desde $3,900</div>
+            <p>Diseño según la temática del evento con globos de látex y metálicos, arcos, columnas y más. El costo varía según el diseño y la cantidad de espacios a decorar.</p>
+          </article>
+          <article class="complement-card">
+            <h3>Pastelería</h3>
+            <div class="complement-price">Desde $3,000</div>
+            <p>Diseño según la temática del evento, impresión comestible, detalles en fondant, papel couché y sabor a elegir. El precio indicado es aproximado para 100 personas y varía según el diseño y el tamaño.</p>
+          </article>
+          <article class="complement-card">
+            <h3>Repostería temática</h3>
+            <div class="complement-price">Cotización personalizada</div>
+            <p>Cupcakes, brownies bomba, carlotas de limón, gelatinas, sandías locas, frappés, waffles, tartas de frutas y mesas de postres.</p>
+          </article>
+          <article class="complement-card">
+            <h3>Pirotecnia y portadas</h3>
+            <div class="complement-price">Desde $3,300</div>
+            <ul>
+              <li>Pirotecnia de cielo</li>
+              <li>1 bomba japonesa: $260</li>
+              <li>2 bombas con forma de corazón: $290</li>
+              <li>Chisperos: $130 cada uno</li>
+              <li>Toritos con dulces: $600</li>
+              <li>Portadas para bodas, XV años y decoraciones: desde $3,300</li>
+            </ul>
+          </article>
+        </div>
       </div>
     </section>
 
